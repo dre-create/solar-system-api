@@ -47,7 +47,7 @@ def get_single_planet(planet_id):
         return {
             "success": False,
             "message": f"Planet id_{planet_id} was not found"
-        }
+        }, 404
 
     if request.method == "GET":
         return planet.to_json()
