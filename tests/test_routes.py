@@ -40,10 +40,10 @@ def test_get_single_planet_without_records(client):
     response_body = response.get_json()
     # Assert
     assert response.status_code == 404
-    # assert response_body == {
-    #         "success": False,
-    #         "message": f"Planet id_1 was not found"
-    #     }
+    assert response_body == {
+            "success": False,
+            "message": "Planet id_1 was not found"
+        }
 
 def test_create_one_planet(client, planet_data):
     # Act
