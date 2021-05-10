@@ -1,4 +1,3 @@
-from flask.helpers import make_response
 from app import db
 from app.Models.planet import Planet
 from flask import Blueprint, request, jsonify
@@ -6,7 +5,7 @@ from flask import Blueprint, request, jsonify
 
 solar_system_bp = Blueprint("solar_system", __name__, url_prefix="/planets")
 
-@solar_system_bp.route("", methods = ["POST"])
+@solar_system_bp.route("", methods=["POST"], strict_slashes=False)
 def create_new_planet():
     request_body = request.get_json()
     new_planet = Planet(
@@ -20,7 +19,7 @@ def create_new_planet():
         "message": f"Planet {new_planet.name} successfully created"
     }, 201
 
-@solar_system_bp.route("", methods = ["GET"])
+@solar_system_bp.route("", methods=["GET"], strict_slashes=False)
 def get_all_planets():
     planets = Planet.query.all()
     planets_response = []
@@ -34,7 +33,7 @@ def is_int(value):
     except ValueError:
         return False
     
-@solar_system_bp.route("/<planet_id>", methods = ["GET", "PUT", "DELETE"])
+@solar_system_bp.route("/<planet_id>", methods=["GET", "PUT", "DELETE"], strict_slashes=False)
 def get_single_planet(planet_id):
     if not is_int(planet_id):
         return {
